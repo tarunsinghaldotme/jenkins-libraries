@@ -47,3 +47,18 @@ def helmDeploy(Map args) {
         echo "Application ${args.name} successfully deployed. Use helm status ${args.name} to check"
     }
 }   
+
+
+def ImagePublishECR(String REGION, String repo_name, String DockerfileName, String DockerfilePath, String version ) {
+	println "Building Docker Image"
+	DockerImage = docker.build("${repo_name}", "-f ${DockerfileName} ${DockerfilePath}")
+
+	println "Getting login to AWS ECR"
+	sh "aws ecr get-login --no-include-email --region ${REGION}"
+
+	println "Pushing Image to ECR"
+	DockerImage.push("${version}")
+        DockerImage.push("latest")
+}
+
+
