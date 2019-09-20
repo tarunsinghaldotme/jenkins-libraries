@@ -2,16 +2,16 @@ package me.tarunsinghal;
 
 def helmVersion() {
     println "checking client/server version"
-    sh 'helm version --short'
+    sh "helm version --short"
 }
 
 
 def helmChartVersionUpdate(String version, String chart_dir) {
-    sh 'sed -i "s#0.1.0#${version}#g" ${chart_dir}/Chart.yaml'
+    sh "sed -i "s#0.1.0#${version}#g" ${chart_dir}/Chart.yaml"
 }
 
 def helmLint(String chart_dir) {
-    sh 'helm lint ${chart_dir}'
+    sh "helm lint ${chart_dir}"
 }
 
 
