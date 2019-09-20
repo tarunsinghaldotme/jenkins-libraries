@@ -5,16 +5,12 @@ def helmVersion() {
     sh 'helm version --short'
 }
 
-def helmChartVersionUpdate() {
-    sh 'sed -i "s#0.1.2#${version#g}#g" ${chart_dir}/Chart.yaml'
+
+def helmChartVersionUpdate(String version, String chart_dir) {
+    sh 'sed -i "s#0.1.0#${version}#g" ${chart_dir}/Chart.yaml'
 }
 
-
-def helmChartVersionUpdate() {
-    sh 'sed -i "s#0.1.2#${version#g}#g" ${chart_dir}/Chart.yaml'
-}
-
-def helmLint() {
+def helmLint(String chart_dir) {
     sh 'helm lint ${chart_dir}'
 }
 
