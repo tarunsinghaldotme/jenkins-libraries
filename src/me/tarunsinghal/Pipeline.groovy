@@ -20,7 +20,7 @@ def helmDeploy(Map args) {
     //configure helm client and confirm tiller process is installed
     helmVersion()
     
-    helmChartVersionUpdate()
+    helmChartVersionUpdate(version, chart_dir)
 
 
     def String namespace
