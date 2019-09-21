@@ -55,12 +55,13 @@ def ImagePublishECR(String REGION, String repo_name, String DockerfileName, Stri
 
 	println "Getting login to AWS ECR"
 //	sh "$(aws ecr get-login --no-include-email --region ${REGION})"
-	def sout = new StringBuilder(), serr = new StringBuilder()
-	def proc = '$(aws ecr get-login --no-include-email --region "${REGION}")'.execute()
-	proc.consumeProcessOutput(sout, serr)
-	proc.waitForOrKill(1000)
-	println "out > $sout err> $serr"
+	def login = sh (
+                        script: "aws ecr get-login --no-include-email --region ${REGION} ",
+                        returnStdout: true
+                    )
 	
+
+	login.execute().text
 	println "Pushing Image to ECR"
 	DockerImage.push("${version}")
         DockerImage.push("latest")
