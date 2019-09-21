@@ -54,7 +54,7 @@ def ImagePublishECR(String REGION, String repo_name, String DockerfileName, Stri
 	DockerImage = docker.build("${repo_name}", "-f ${DockerfileName} ${DockerfilePath}")
 
 	println "Getting login to AWS ECR"
-	sh "aws ecr get-login --no-include-email --region ${REGION}"
+	sh "$(aws ecr get-login --no-include-email --region ${REGION})"
 
 	println "Pushing Image to ECR"
 	DockerImage.push("${version}")
