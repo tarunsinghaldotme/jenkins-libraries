@@ -66,5 +66,3 @@ def ImagePublishECR(String REGION, String repo_name, String DockerfileName, Stri
 	DockerImage.push("${version}")
         DockerImage.push("latest")
 }
-
-
