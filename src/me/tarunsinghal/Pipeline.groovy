@@ -76,4 +76,11 @@ def ImageTagCheck(String repo_name, String version) {
         if (status !=0) {
                 println "image do not exists"
         }
+        else{
+                println "image already exists with the tag ${version}"
+                currentBuild.result = 'FAILURE'
+                skipRemainingStages = true
+                sh 'exit 1'
+                return
+        }
 }
