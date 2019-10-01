@@ -84,3 +84,20 @@ def ImageTagCheck(String repo_name, String version) {
                 return
         }
 }
+
+def EcrLogin(String REGION) {
+        def login = sh (
+                            script: "aws ecr get-login --no-include-email --region ${REGION} ",
+                            returnStdout: true
+                        )
+        
+
+        login.execute().text
+}
+
+def DockerImageTag(String version, String version1, String repo_name, String REGION) {
+        EcrLogin(REGION)
+        newImage = docker.image("${repo_name}:${version}")
+    
+        newImage.push("${version1}")
+}
