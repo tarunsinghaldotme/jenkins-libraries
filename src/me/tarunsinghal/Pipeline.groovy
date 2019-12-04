@@ -64,7 +64,7 @@ def ImagePublishECR(String REGION, String repo_name, String DockerfileName, Stri
         login.execute().text
 	println "Pushing Image to ECR"
 	DockerImage.push("${version}")
-        DockerImage.push("latest")
+       // DockerImage.push("latest")
 }
 
 def ImageTagCheck(String repo_name, String version) {
